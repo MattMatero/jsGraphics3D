@@ -1,0 +1,48 @@
+<html>
+<body>
+<script src="Matrix.js"></script>
+<script src="Vector.js"></script>
+<script>
+console.log( new Matrix() );
+mat1 = new Matrix();
+var mat2 = new Matrix();
+var v = new Vector();
+v.setX(1);
+v.setY(2);
+v.setZ(1);
+console.log(v.toString());
+
+
+//makes 3D vector
+var v2 = v.make3D(2,5);
+//console.log(v2.toString());
+var arr = [1,2,3,4,5,6,7,8,9];
+var arr2 = [2,3,4,5,6,7,8,9,10];
+
+
+//test case
+//example: translate(-1,1), rotate(90), rotate(-30), rotate(-60), translate(1,-1)
+//m5.mult(m4.mult(m3.mult(m2.mult(m1.mult(V)))));
+mat1.buildMatrix(arr); //original matrix
+console.log(mat1.toString());
+
+var mat4 = new Matrix().translate(1,-1); //translate 1,-1
+var mat3 = new Matrix().rotationMatrix(-60); //rotate by -60 degrees
+var mat5 = new Matrix().rotationMatrix(-30); //rotate by -30 degrees
+var mat6 = new Matrix().rotationMatrix(90); //rortate by 90 degrees
+var mat7 = new Matrix().translate(-1,1); //translate by -1,1
+
+
+console.log("Test Case");
+var vecMat = v.multMatrix(mat4).multMatrix(mat3).multMatrix(mat5).multMatrix(mat6).multMatrix(mat7);
+console.log(vecMat.toString());
+
+
+
+
+
+
+</script>
+<h3>hi2</h3>
+</body>
+</html>
