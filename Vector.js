@@ -4,15 +4,15 @@ Vector function that will take in 2 components and set the 3 to 1
 */
 var Vector = function(a,b,c){
 	if(a === undefined){
-		a = 1;
+		a = 0;
 	}
 
 	if( b === undefined){
-		b = 1;
+		b = 0;
 	}
 	
 	if( c === undefined){
-		c = 1;
+		c = 0;
 	}
 	
 	 this.arr = [a,b,c,1];
@@ -197,4 +197,8 @@ Vector.prototype.setValues = function(arr){
 	for(i = 0; i < 3; i++){
 		this.arr[i] = arr[i];
 	}
+}	
+Vector.prototype.draw = function(context){
+	context.fillStyle = "#FF0000";
+	context.fillRect(this.arr[0]-4,this.arr[1]-4,8,8);
 }
