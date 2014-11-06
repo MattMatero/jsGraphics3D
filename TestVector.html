@@ -5,8 +5,19 @@
 var v = new Vector();
 var v2 = new Vector();
 var v3 = new Vector();
+var arr = [1,2,3];
+var arr2 = [1,2,3];
 
-v.build();
+v.build(arr);
+v2.build(arr2);
+console.log("v: " + v.toString());
+console.log("v2: " + v2.toString());
+
+v.addSelf(v2);
+console.log(v.toString());
+
+v.multSelf(v2);
+console.log("v mult v2: " + v.toString());
 </script>
 <h3>hi</h3>
 </body>

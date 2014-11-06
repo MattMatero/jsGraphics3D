@@ -2,20 +2,24 @@
 /*
 Vector function that will take in 2 components and set the 3 to 1
 */
-var Vector = function(a,b){
+var Vector = function(a,b,c){
 	if(a === undefined){
-		a = 0;
+		a = 1;
 	}
 
 	if( b === undefined){
-		b = 0;
+		b = 1;
 	}
 	
-	 this.arr = [a,b,1];
+	if( c === undefined){
+		c = 1;
+	}
+	
+	 this.arr = [a,b,c,1];
 }
 
 Vector.prototype.clone = function(vec){
-	for( i = 0; i < 3; i++)
+	for( i = 0; i < 4; i++)
 		this.arr[i] = vec.getElement(i);
 }
 
@@ -30,6 +34,7 @@ Vector.prototype.addSelf = function(Vector){
 	this.arr[0] += Vector.getX();
 	this.arr[1] += Vector.getY();
 	this.arr[2] += Vector.getZ();
+	this.arr[3] += Vector.getK();
 }
 /*
 add: Does vector addition and returns a new vector containing the information
@@ -39,6 +44,7 @@ Vector.prototype.add = function( Vector ){
 	addedVector.setX(this.arr[0] + Vector.getX());
 	addedVector.setY(this.arr[1] + Vector.getY());
 	addedVector.setZ(this.arr[2] + Vector.getZ());
+	addedVector.setK(this.arr[3] + Vector.getK());
 	return addedVector;
 }
 
@@ -48,9 +54,13 @@ returns the calling object
 */
 Vector.prototype.build = function( array ) {
 	
-	this.arr[0] = array[0];
-	this.arr[1] = array[1];
-	this.arr[2] = array[2];
+	for(i = 0; i < 4; i++){
+		if(  !(array[i] === undefined)){
+			this.arr[i] = array[i];
+		}else{
+			arr[i] = 1;
+		}
+	}
 	
 	return this;
 }
@@ -60,11 +70,11 @@ multMatrix: Takes in a matrix and multiplies it by the calling vector
 returns a new vector containing the result. 
 */
 Vector.prototype.multMatrix = function( Matrix ){
-	var result = new Array(3);
-	result = [0,0,0];
+	var result = new Array(4);
+	result = [0,0,0,0];
 
-	for(i =0; i < 3; i++){
-			for(j = 0; j < 3; j++){
+	for(i =0; i < 4; i++){
+			for(j = 0; j < 4; j++){
 					result[i] += Matrix.arr[i][j] * this.arr[j];
 			}
 		}
@@ -137,7 +147,7 @@ Vector.prototype.multNew = function( Vector ) {
 
 //simple string representation of a vector
 Vector.prototype.toString = function(){
-	return "x: " + this.arr[0] + " y: " + this.arr[1] + " z: " + this.arr[2];
+	return "x: " + this.arr[0] + " y: " + this.arr[1] + " z: " + this.arr[2] + " k: " + this.arr[3];
 }
 
 //getter...
@@ -155,6 +165,11 @@ Vector.prototype.getZ = function(){
 	return this.arr[2];
 }
 
+//getter...
+Vector.prototype.getK = function(){
+	return this.arr[3];
+}
+
 //setter...
 Vector.prototype.setX = function(num){
 	this.arr[0] = num;
@@ -170,6 +185,11 @@ Vector.prototype.setZ = function(num){
 	this.arr[2] = num;
 }
 
+
+//setter...
+Vector.prototype.setK = function(num){
+	this.arr[3] = num;
+}
 /*
 setValues: Takes in an array of values and sets the calling vector's attributes equal to them.
 */
