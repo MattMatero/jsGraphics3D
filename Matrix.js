@@ -69,8 +69,18 @@ Matrix.prototype.get1DArr = function(arr){
         result.push(arr[x][y])
         }
     }
-
     return result
+}
+
+/*
+scale: Takes in a number and scales the matrix by that value
+*/
+Matrix.prototype.scale = function(scaler){
+	for(var i = 0; i < this.arr.length; i++){
+		for(var j = 0; j < this.arr.length; j++){
+			this.arr[i][j] *= scaler;
+		}
+	}
 }
 
 

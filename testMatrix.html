@@ -42,6 +42,11 @@ mat3 = mat1.mult(mat3);
 mat4 = mat1.rotationZ(-10);
 mat3 = mat3.mult(mat4);
 console.log(" z rotation \n" + mat3.toString());
+
+mat1.buildMatrix(arr);
+console.log("mat1 before: \n" + mat1.toString());
+mat1.scale(5);
+console.log("mat1 scaled \n" + mat1.toString());
 </script>
 <h3>hi2</h3>
 </body>

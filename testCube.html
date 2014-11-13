@@ -10,25 +10,9 @@
 <script>
 var geo = new Geometry();
 var rotate = new Matrix().rotationY(1);
-//console.log(rotate.toString());
-
-var vec1 = new Vector(200,200);
-var vec2 = new Vector(400,200);
-var vec3 = new Vector(200,300);
-var vec4 = new Vector(400,300);
-geo.addVertex(vec1);
-geo.addVertex(vec2);
-geo.addVertex(vec3);
-geo.addVertex(vec4);
-//var arr = [new Point(vec1), new Point(vec2), new Point(vec3)];
-var face = new Face();
-face.set(0,1,2);
-var face2 = new Face();
-face2.set(1,3,2);
-geo.addFace(face);
-geo.addFace(face2);
 
 
+geo.makeCube();
 
 var display = document.getElementById("theCanvas");
 var context = display.getContext('2d');
@@ -49,7 +33,7 @@ function render(){
 	
 	context.fillStyle = "#00FF00";
 	context.fillRect(50,50,240,180);
-	geo.applyMatrix(rotate);
+	//geo.applyMatrix(rotate);
 	geo.draw(context);
 }
 </script>
