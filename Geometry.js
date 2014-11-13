@@ -35,8 +35,8 @@ Geometry.prototype.draw = function(context){
 }
 
 
-Geometry.prototype.setVertices = new function(vecArr){
-	for(var i = 0; i < this.vertices.length; i++){
+Geometry.prototype.setVertices = function(vecArr){
+	for(var i = 0; i < vecArr.length; i++){
 		this.vertices.push(vecArr[i]);
 	}
 	
@@ -44,8 +44,8 @@ Geometry.prototype.setVertices = new function(vecArr){
 }
 
 
-Geometry.prototype.setFaces = new function(faceArr){
-	for(var i = 0; i < this.faces.length; i++){
+Geometry.prototype.setFaces = function(faceArr){
+	for(var i = 0; i < faceArr.length; i++){
 		this.faces.push(faceArr[i]);
 	}
 	
@@ -55,7 +55,7 @@ Geometry.prototype.setFaces = new function(faceArr){
 /*
 makeCube: Makes a unit cube 
 */
-Geometry.prototype.makeCube = new function(){
+Geometry.prototype.makeCube = function(){
 	var verts = new Array(8);
 	var cFaces = new Array(12);
 	//vertices of a cube
