@@ -49,6 +49,26 @@ Vector.prototype.add = function( Vector ){
 }
 
 /*
+dotProduct: Takes the dor product of two vec4s
+returns the dot product represented as a number
+*/
+Vector.prototype.dotProduct = function(Vector){
+	var dotProd = 0;
+	for(i = 0; i < 3; i++){
+		dotProd += this.arr[i]*Vector.arr[i];
+	}
+
+	return dotProd;
+}
+
+Vector.prototype.scaleMult = function(num){
+	var x = this.getX() * num;
+	var y = this.getY() * num;
+	var z = this.getZ() * num;
+	return new Vector(x,y,z);
+}
+
+/*
 build: Takes in an array of values and stores them in the attributes of the calling vector
 returns the calling object 
 */
@@ -118,6 +138,19 @@ Vector.prototype.make3D = function( a,b ){
 	return v;
 }
 
+Vector.prototype.subtract = function(vector){
+	var x = this.getX() - vector.getX();
+	var y = this.getY() - vector.getY();
+	var z = this.getZ() - vector.getZ();
+	return new Vector(x,y,z);
+}
+
+Vector.prototype.cross = function(vector){
+	var x = (this.getY()*vector.getZ()) - (vector.getY()*this.getZ());
+	var y = -(this.getX()*vector.getZ()) + (vector.getX()*this.getZ());
+	var z = (this.getX()*vector.getY()) - (vector.getX()*this.getY());
+	return new Vector(x,y,z);
+}
 
 
 /*

@@ -8,11 +8,11 @@
 <script src = "Face.js"></script>
 <script src = "Geometry.js"></script>
 <script>
-var geo = new Geometry();
+var geo = new Geometry().makeCube();
 var rotate = new Matrix().rotationY(1);
 
+geo.applyMatrix(new Matrix().scaleMatrix(250,50,20));
 
-geo.makeCube();
 
 var display = document.getElementById("theCanvas");
 var context = display.getContext('2d');

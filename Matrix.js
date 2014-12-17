@@ -85,6 +85,22 @@ Matrix.prototype.scale = function(scaler){
 
 
 /*
+a 0 0 0
+0 b 0 0
+0 0 c 0
+0 0 0 1
+*/
+Matrix.prototype.scaleMatrix = function(a,b,c){
+	var scaling = new Array(4);
+	scaling[0] = [a,0,0,0];
+	scaling[1] = [0,b,0,0];
+	scaling[2] = [0,0,c,0];
+	scaling[3] = [0,0,0,1];
+	var arr = new Matrix().get1DArr(scaling);
+	return new Matrix().buildMatrix(arr);
+}
+
+/*
 clone: Takes in a matrix and creates a copy of it
 return: the copy of the matrix
 */

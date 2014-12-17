@@ -52,41 +52,32 @@ Geometry.prototype.setFaces = function(faceArr){
 	return this;
 }
 
+
+
 /*
 makeCube: Makes a unit cube 
 */
 Geometry.prototype.makeCube = function(){
-	var verts = new Array(8);
-	var cFaces = new Array(12);
+	var verts = new Array(0);
+	var cFaces = new Array(0);
 	//vertices of a cube
 	verts.push(new Vector(0,0,0));
-	verts.push(new Vector(1,0,0));
-	verts.push(new Vector(0,1,0));
-	verts.push(new Vector(1,1,0));
-	verts.push(new Vector(0,0,1));
-	verts.push(new Vector(1,0,1));
-	verts.push(new Vector(0,1,1));
-	verts.push(new Vector(1,1,1));
+	verts.push(new Vector(100,0,0));
+	verts.push(new Vector(0,100,0));
+	verts.push(new Vector(100,100,0));
+	verts.push(new Vector(0,0,-100));
+	verts.push(new Vector(100,0,-100));
+	verts.push(new Vector(0,100,-100));
+	verts.push(new Vector(100,100,-100));
 
 	//faces of a cube
 	//top face
-	cFaces.push(new Face().set(0,4,1));
-	cFaces.push(new Face().set(1,4,5));
-	//left face
-	cFaces.push(new Face().set(0,2,4));
-	cFaces.push(new Face().set(4,2,6));
-	//front
-	cFaces.push(new Face().set(4,6,5));
-	cFaces.push(new Face().set(5,6,7));
-	//right
-	cFaces.push(new Face().set(1,5,7));
-	cFaces.push(new Face().set(5,7,3));
-	//back
-	cFaces.push(new Face().set(6,1,2));
-	cFaces.push(new Face().set(1,3,2));
-	//bottom
-	cFaces.push(new Face().set(2,3,6));
-	cFaces.push(new Face().set(3,7,6));
-	
+	cFaces.push(new Face().set(0,2,3,1)); //front
+	cFaces.push(new Face().set(2,6,7,3)); //top
+	cFaces.push(new Face().set(1,3,7,5)); //right
+	cFaces.push(new Face().set(0,4,5,1)); //bottom
+	cFaces.push(new Face().set(0,2,6,4)); //left
+	cFaces.push(new Face().set(6,7,5,4)); //back
+
 	return new Geometry().setVertices(verts).setFaces(cFaces);
 }

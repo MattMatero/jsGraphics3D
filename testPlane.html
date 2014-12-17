@@ -1,0 +1,84 @@
+<html>
+<body>
+<canvas id="theCanvas" width="480" height="360"></canvas>
+<script src = "Vector.js"></script>
+<script src = "Matrix.js"></script>
+<script src = "Point.js"></script>
+<script src = "Triangle.js"></script>
+<script src = "Face.js"></script>
+<script src = "Geometry.js"></script>
+<script src = "Line.js"></script>
+<script src = "Plane.js"></script>
+<script>
+var display = document.getElementById("theCanvas");
+var context = display.getContext('2d');
+
+var cube = new Geometry().makeCube();
+var topLeft = new Vector(-200,200,150);
+var topRight = new Vector(200,200,150);
+var bottomLeft = new Vector(-200,-200,150);
+var viewPort = new Plane(topLeft,topRight,bottomLeft);
+var wAxis = topRight.subtract(topLeft);
+var hAxis = bottomLeft.subtract(topLeft);
+camPos = new Vector(0,50,200);
+
+
+loop();
+
+function loop()
+{
+	render();
+	setTimeout(loop, 17); // 60 FPS
+}
+
+
+function render(){
+	context.fillStyle = "#ddddff";
+	context.fillRect(0,0,480,360);
+	context.fillStyle = "#00FF00";
+	
+	var screenX = new Array(cube.vertices.length);
+	var screenY = new Array(cube.vertices.length);
+	for(var i = 0; i < cube.vertices.length; i++){
+		var vert = cube.vertices[i];
+		var l = new Line(camPos,vert);
+		var q = l.intersect(viewPort);
+		var b = (((q.getY()-topLeft.getY())*wAxis.getX()) + ((topLeft.getX()-q.getX())*wAxis.getY())) / ((hAxis.getY()*wAxis.getX())-(hAxis.getX()*wAxis.getY()) )
+		var a = (q.getX()-topLeft.getX()-(b*hAxis.getX()))/wAxis.getX();
+		screenX[i] = a*480;
+		screenY[i] = b*360;
+		console.log("a" + a);
+		console.log("b" + b);
+		context.fillRect(a*480,b*360,4,4);
+	}
+	
+	for(var j = 0; j < cube.faces.length; j++){
+		var f = cube.faces[j];
+		context.beginPath();
+		var x0 = screenX[f.index[0]];
+		var y0 = screenY[f.index[0]];
+		var x1 = screenX[f.index[1]];
+		var y1 = screenY[f.index[1]];
+		var x2 = screenX[f.index[2]];
+		var y2 = screenY[f.index[2]];
+		var x3 = screenX[f.index[3]];
+		var y3 = screenY[f.index[3]];
+		
+		context.moveTo(x3,y3);
+		context.lineTo(x0,y0);
+		context.lineTo(x1,y1);
+		context.lineTo(x2,y2);
+		context.lineTo(x3,y3);
+		context.stroke();
+	}
+	cube.applyMatrix(new Matrix().rotationY(1));
+	cube.applyMatrix(new Matrix().rotationX(.7));
+	//geo.applyMatrix(rotate);
+	//geo.draw(context);
+}
+
+
+
+</script>
+</body>
+</html>
